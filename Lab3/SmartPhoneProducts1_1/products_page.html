@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Smart Phone Store</title>
+
+
+    <link id='xxx' href="products-style.css" rel="stylesheet">
+
+    <style id='localStyle'></style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Used SmartPhone Store</h1>
+    </header>
+    <div>
+        <aside>
+            <div>
+                <input id="speedSlider" type="range" min=".1" max="5" step=".1" onchange="
+            localStyle.innerHTML = '.rotate img {animation-duration: ' + speedSlider.value + 's;}';
+            " style="direction: rtl;" />
+            </div>
+        </aside>
+
+<main>
+    <section class="item" onmouseover="this.className='item rotate';" onclick="this.className='item;';">
+        <h2>HTC</h2>
+        <p>&dollar;40.00</p>
+        <img src="http://dport96.github.io/ITM352/morea/090.flow-control-II/HTC.jpg" height="200px" width="200px">
+   </section>
+   <section class="item" onmouseover="this.className='item rotate';" onclick="this.className='item;';">
+        <h2>Apple</h2>
+        <p>&dollar;75.00</p> 
+        <img src="http://dport96.github.io/ITM352/morea/090.flow-control-II/iphone-3gs.jpg" height="200px" width="200px">
+    </section>
+    <section class="item" onmouseover="this.className='item rotate';" onclick="this.className='item;';">
+        <h2>Nokia</h2>
+        <p>&dollar;35.00</p>
+        <img src="http://dport96.github.io/ITM352/morea/090.flow-control-II/Nokia.jpg" height="200px" width="200px">
+    </section>
+    <section class="item" onmouseover="this.className='item rotate';" onclick="this.className='item;';">
+        <h2>Samsung</h2>
+        <p>&dollar;45.00</p>
+        <img src="http://dport96.github.io/ITM352/morea/090.flow-control-II/Samsung.jpg" height="200px" width="200px">
+    </section>
+    <section class="item" onmouseover="this.className='item rotate';" onclick="this.className='item;';">
+       <h2>Blackberry</h2>
+         <p>&dollar;10.00</p>
+        <img src="http://dport96.github.io/ITM352/morea/090.flow-control-II/Blackberry.jpg" height="200px" width="200px">
+    </section> 
+</div>
+</main>
+<footer><h1>Your One Stop Phone Shop</h1></footer>
+</body>
+</html>
