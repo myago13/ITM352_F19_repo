@@ -2,20 +2,51 @@
 <script>
  
  age = 20;
-
+/*
     fav_num = 1;
     
     day_of_birth = 13;
     
     month_of_birth = 5;
 
-document.getElementById("output_span").innerHTML
-=(age + fav_num / day_of_birth * month_of_birth);
+document.getElementById("output_span").innerHTML=(age + fav_num) / day_of_birth * month_of_birth
 
-//(age + fav_num) / day_of_birth * month_of_birth
-
+//=(age + fav_num / day_of_birth * month_of_birth);
 n = 20;
 
 m = 2;
+first_name="Melissa";
+last_name="Yago";
+//first_name + ' ' + last_name
+document.write(`${first_name} ${last_name}`);
+document.write(`
+<table border="1">
+    <tr><th>Line</th><th>Name</th></tr>
+    <tr><td>1.</td><td>${first_name}</td></tr>
+    <tr><td>2.</td><td><br />
+        ${first_name}</td></tr>
+    <tr><td>3.</td><td>\n${first_name}</td></tr>
+    <tr><td>4.</td><td>'\n${first_name}'</td></tr>
+    <tr><td>5.</td><td>"\n${first_name}"</td></tr>
+    `);
+</table>
+*/
+
+
+first_name="Melissa";
+
+
+document.write(`
+<table border="1">
+    <tr><th>Line</th><th>Name</th></tr>
+    <tr><td>1.</td><td>${first_name}</td></tr>
+    <tr><td>2.</td><td><br />
+        ${first_name}</td></tr>
+        <tr><td>3.</td><td>\n${first_name}</td></tr>
+    <tr><td>4.</td><td>'\n${first_name}'</td></tr>
+    <tr><td>5.</td><td>"\n${first_name}"</td></tr>
+</table>
+`);
+
 
     </script>
