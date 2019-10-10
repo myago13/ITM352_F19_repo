@@ -1,7 +1,13 @@
 var age= 20;
 var number=0;
-for(var number=1; number<age; number++){
-  console.log(`are you ${number} years old?`);
+while(number <age){
+    
+    number++;
 
+if(number > (age/2) ){
+    console.log("I'm old!");
+  process.exit();
 }
-console.log(`are you${number} years old?`);
+console.log(`Are you ${number} years old?`);
+}
+console.log(`You must be ${number} years old`);
