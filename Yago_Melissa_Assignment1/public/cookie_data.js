@@ -37,7 +37,7 @@ var products =
 {
 "Cookie": "Custom Made",
 "Price": 8.00,
-"Description": "Contains five sugar cookies with a design of your choice. Please email your image to Cookies808@gmail.com along with your order number",
+"Description": "Contains five sugar cookies with a design of your choice. Please email your image to Cookies808@gmail.com along with a copy of your invoice.",
 "image": "./images/custom.png"
 }];
 
