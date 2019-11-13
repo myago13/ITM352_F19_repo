@@ -1,0 +1,75 @@
+/* A CSS Page that styles the invoice.html page and products_display.html page. */
+/* Main & Image CSS sections were borrowed from Daniel Port's Smartphone CSS Page */ 
+/* Styles Header in terms of font size, bold and alignment*/
+header{
+   font-size: 30px;
+   font-weight: bold;
+   text-align: center;
+} 
+
+ /* Changes width of the body and html */
+html, body {
+   width: 100%;
+}
+
+ /* Centers Table in invoice page */
+table{
+   margin: 0 auto;
+}
+
+ /* Styles HTML*/
+html {
+    font-family: 'Raleway', sans-serif;
+    background-color: orange;
+    font-size: 16px;
+  }
+
+   /* Centers the body, changes alignment, color and row wraps text */
+ main {
+    color: black;
+    width: 600px; margin: 0 auto;
+    display: flex;
+    text-align: center;
+    flex-flow: row wrap;
+    justify-content: space-around; 
+    background-repeat: no-repeat;
+    background-size: 100%;     
+ } 
+ 
+  /* Creates border, alignment and margins for div section*/
+ div{  border: 5px solid black; margin: 10 auto; text-align: center;
+    display: flex;}
+ 
+  /* Centers Headings */
+ h1,
+ h2 {
+ text-align: center;
+ }
+ 
+  /* Styles Images*/
+ img {
+    border: 1px black;
+    /* black border */
+    border-radius: 4px;
+    /* Rounded border */
+    padding: 5px;
+    /* Some padding */
+    width: 600px;
+    /* Set a small width */
+    height: 600px;
+    /*set height */
+ }  
+
+ /* Centers Footer */
+ footer {
+    border-top: 0;
+    text-align: center;
+  }
+
+   /* Centers the gif in invoice.html*/
+.center{
+   display:block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 50%;
+}
