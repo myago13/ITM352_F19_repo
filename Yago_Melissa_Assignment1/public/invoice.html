@@ -2,8 +2,49 @@
 // This file is the invoice that contains the calculations based on the quantity & product selected from the products_display page. 
 // Code is borrowed from Daniel Port's SmartPhone Store Invoice
 //gif is taken from giphy site
+//for whatever reason, when referencing the cookie_data.js which contains the array, it would not render on the invoice but it does on the products display page
 </script>
-<script src="Cookie_data.js" type="text/javascript"> //Src references the cookie_data.js to be used in the html file. text/javascript is text from Javascript of the cookie_data.js file.
+
+<script>
+  var products =
+[
+{
+"Cookie": "Chocolate Chip",
+"Price": 5.00,
+"Description": "Contains five delicious chocolate chip cookies",
+"image": "./images/chocolatechip.jpg"
+},
+
+
+{
+"Cookie": "Oatmeal Raisin",
+"Price": 4.00,
+"Description": "Contains five delicious oatmeal raisin cookies",
+"image": "./images/oatmeal.jpg"
+},
+
+{
+"Cookie": "Peanut Butter",
+"Price": 4.50,
+"Description": "Contains five delicious peanut butter cookies",
+"image": "./images/peanutbutter.jpg"
+},
+
+
+{
+"Cookie": "Almond",
+"Price": 5.50,
+"Description": "Contains five almond cookies",
+"image": "./images/almond.jpg"
+},
+
+
+{
+"Cookie": "Custom Made",
+"Price": 8.00,
+"Description": "Contains five sugar cookies with a design of your choice. Please email your image to Cookies808@gmail.com along with a copy of your invoice.",
+"image": "./images/custom.png"
+}];
 </script> 
 <script>
   let params = (new URL(document.location)).searchParams; //Parses out the URL starting with the file name, quantity and purchase submit.
