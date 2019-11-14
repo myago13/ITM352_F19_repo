@@ -41,8 +41,9 @@ var products =
 "image": "./images/custom.png"
 }];
 
-
-
+if (typeof module != 'undefined') {
+    module.exports.products = products;
+    }
 
 
 
