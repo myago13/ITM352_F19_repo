@@ -1,5 +1,5 @@
 //json array that contains all five products with their respective price, description and image. Above is a variable called products that defines the array that is used in the invoice & products_display page. 
-//Code was learned through instructions given on Assignment 1
+//Melissa Yago 11/14/19  Code was learned through instructions given on Assignment 1
 
 var products =
 [
@@ -43,7 +43,7 @@ var products =
 
 if (typeof module != 'undefined') {
     module.exports.products = products;
-    }
+    } // allows products to render in products_display page
 
 
 
