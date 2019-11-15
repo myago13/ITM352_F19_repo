@@ -1,55 +1,17 @@
 <script>
 // This file is the invoice that contains the calculations based on the quantity & product selected from the products_display page. 
-// Code is borrowed from Daniel Port's SmartPhone Store Invoice
-//gif is taken from giphy site
-//for whatever reason, when referencing the cookie_data.js which contains the array, it would not render on the invoice but it does on the products display page
+// Melissa Yago 11/14/19 Code was adapted from Invoice 2 WOD Exercise 
+//Gif is taken from giphy site
+
 </script>
+<script src="cookie_data.js"></script>
 
-<script>
-  var products =
-[
-{
-"Cookie": "Chocolate Chip",
-"Price": 5.00,
-"Description": "Contains five delicious chocolate chip cookies",
-"image": "./images/chocolatechip.jpg"
-},
-
-
-{
-"Cookie": "Oatmeal Raisin",
-"Price": 4.00,
-"Description": "Contains five delicious oatmeal raisin cookies",
-"image": "./images/oatmeal.jpg"
-},
-
-{
-"Cookie": "Peanut Butter",
-"Price": 4.50,
-"Description": "Contains five delicious peanut butter cookies",
-"image": "./images/peanutbutter.jpg"
-},
-
-
-{
-"Cookie": "Almond",
-"Price": 5.50,
-"Description": "Contains five almond cookies",
-"image": "./images/almond.jpg"
-},
-
-
-{
-"Cookie": "Custom Made",
-"Price": 8.00,
-"Description": "Contains five sugar cookies with a design of your choice. Please email your image to Cookies808@gmail.com along with a copy of your invoice.",
-"image": "./images/custom.png"
-}];
-</script> 
 <script>
   let params = (new URL(document.location)).searchParams; //Parses out the URL starting with the file name, quantity and purchase submit.
   var quantities = [];
-  // form was submitted so process the invoice
+
+  // Form was submitted so initiate the invoice by taking the quantities that were submitted for each product
+  //If you went to invoice.html directly without submitting anything, you will get a no form submitted
   if (params.has('purchase_submit')) { 
     for (i = 0; i < products.length; i++) {
       if (params.has(`quantity${i}`)) {
@@ -57,7 +19,7 @@
         quantities[i] = a_qty; 
       }
     }
-  } else {
+  } else { 
     document.write('no form submitted');
   }
   console.log(quantities); //writes out quantities
@@ -65,15 +27,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>document </title>
+  <title>Document </title>
 
 </head>
-<link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Raleway" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Raleway" rel="stylesheet"> 
 <header>Ash & Mel's Cookies (Invoice)</header>
 <link rel="stylesheet" href="style.css"
 <body>
@@ -85,9 +46,9 @@
         <th style="text-align: center;" width="13%">Price</th>
         <th style="text-align: center;" width="54%">Extended price</th>
       </tr> 
+
       <script>
-        subtotal = 0;
-    
+        subtotal = 0; //starting amount till prices are calculated and added up
         //If the quantity's of the products are greater than 0, calculate extended price, subtotal and document write the products purchased, quantities of each, price and extended price.
         for (i = 0; i < products.length; i++) {
           if (quantities[i] > 0)  // product row
@@ -104,6 +65,7 @@
       `); 
           }
         }
+
         // Compute tax
         var tax_rate = 0.04;
         var tax = tax_rate * subtotal;
@@ -122,8 +84,10 @@
         // Compute grand total
         var total = subtotal + tax + shipping;
       </script>
+      
+      
       <script>
-      // Below is the creation of the table. Note that toFixed(2) sets the number to two decimal places and that the table writes out the tax, subtotal, shipping and total
+      // Below is the creation of the table. Note that toFixed(2) sets the number to two decimal places and that the table writes out the tax, subtotal, shipping and total.
       </script>
       <tr>
         <td colspan="4" width="100%">&nbsp;</td> 
@@ -154,7 +118,8 @@
       </tr>
     </tbody>
   </table>
-  <div>
+
+  <div id="Policy">
     <br><b>
       OUR SHIPPING POLICY IS: A subtotal $0 - $49.99 will be $5 shipping.
       A subtotal $50 - $99.99 will be $10 shipping.
