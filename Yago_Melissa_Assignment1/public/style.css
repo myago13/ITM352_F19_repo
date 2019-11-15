@@ -1,5 +1,5 @@
 /* A CSS Page that styles the invoice.html page and products_display.html page. */
-/* Main & Image CSS sections were borrowed from Daniel Port's Smartphone CSS Page */ 
+/*Melissa Yago 11/14/19-  Main, font & Image CSS sections were adapted from Daniel Port's Smartphone CSS Page */ 
 /* Styles Header in terms of font size, bold and alignment*/
 header{
    font-size: 30px;
@@ -72,4 +72,10 @@ html {
    margin-left: auto;
    margin-right: auto;
    width: 50%;
+}
+   /* Centers the Shipping Policy in the Invoice*/
+#Policy{
+   width: 700px;
+   margin-left: auto;
+   margin-right: auto;
 }
