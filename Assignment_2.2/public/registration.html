@@ -1,35 +1,27 @@
-<!DOCTYPE html>
 <html lang="en">
+        <link href="pretty.css" rel="stylesheet">
+    <script>src="server.js"</script>
 <head>
-<meta charset="utf-8">
-<title>JavaScript Form Validation using a sample registration form</title>
-<meta name="keywords" content="example, JavaScript Form Validation, Sample registration form" />
-<meta name="description" content="This document is an example of JavaScript Form Validation using a sample registration form. " />
-<link rel='stylesheet' href='registration.css' type='text/css' />
-
-<script src="validate.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
+<body>
 
-<body onload="document.registration.userid.focus();">
-<h1>Registration Form</h1>
-Use tab keys to move from one input field to the next.
-
-<form name='registration' onSubmit="return formValidation();">
-    <ul>
-        <li><label for="userid">User id:</label></li>
-        <li><input type="text" name="userid" size="12" /></li>
-
-        <li><label for="passid">Password:</label></li>
-        <li><input type="password" name="passid" size="12" /></li>
-
-        <li><label for="username">Name:</label></li>
-        <li><input type="text" name="username" size="50" /></li>
-
-        <li><label for="email">Email:</label></li>
-        <li><input type="text" name="email" size="50" /></li>
-        
-        <li><input type="submit" name="submit" value="Submit" /></li>
-    </ul>
+  
+<body>
+<form action="" method="POST">
+ <input type="text" name="username" size="40" pattern=".{4,10}" required title="Either 4-10 Characters" placeholder="enter username" ><br />
+ <input type="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password"><br />
+ <input type="password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password again"><br />
+<input type="email" name="email" size="40" placeholder="enter email"><br />
+<input type="submit" value="Submit" id="submit">
 </form>
+</body>
+  
+
+
+
 </body>
 </html>
