@@ -82,7 +82,7 @@ console.log(users_reg_data);
 
 
 
-app.get("/login", function (request, response) {// Process login form POST and redirect to logged in page if ok, back to login page if not
+app.post("/login", function (request, response) {// Process login form POST and redirect to logged in page if ok, back to login page if not
     console.log(request.body);
     the_username= request.body.username;
     if(typeof users_reg_data[the_username] != 'undefined'){ //To check if the username exists in the json data
@@ -93,6 +93,60 @@ app.get("/login", function (request, response) {// Process login form POST and r
         }
     }
 });
+
+app.get("/register", function (request, response) {
+   // Give a simple register form
+   
+   str = `
+<body>
+<form action="" method="POST">
+<input type="text" name="username" size="40" pattern=".{4,10}" required title="Either 4-10 Characters" placeholder="enter username" ><br />
+<input type="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password"><br />
+<input type="password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password again"><br />
+<input type="email" name="email" size="40" placeholder="enter email"><br />
+<input type="submit" value="Submit" id="submit">
+</form>
+</body>
+   `;
+   response.send(str);
+});
+
+app.post("/register", function (request, response) {
+   // process a simple register form
+
+   //Validate
+
+   //Save new user to file name (users_reg_data)
+   username = request.body.username;
+   
+   //Checks to see if username already exists
+   errors = [];
+ 
+if (typeof users_reg_data[username] != 'undefined'){
+errors.push("Username is Already in Use");
+}
+
+console.log(errors, users_reg_data);
+if (errors.length == 0){
+   users_reg_data[username] = {};
+   users_reg_data[username].password = request.body.password;
+   users_reg_data[username].email = request.body.email; //validates email
+
+   fs.writeFileSync(filename, JSON.stringify(users_reg_data));
+   
+   response.redirect("/registration" + 'try again');
+
+   if (typeof users_reg_data[password] != typeof users_reg_data[repeat_password]){
+       response.redirect("/registration");
+   }
+} else {
+   response.redirect("/Login_Successful");
+}
+   
+});
+
+
+
 
 
 
