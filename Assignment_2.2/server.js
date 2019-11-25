@@ -80,6 +80,20 @@ console.log(users_reg_data);
    console.log(filename+ 'does not exist ')
 }
 
+app.get("/login", function (request, response) {
+   // Give a simple login form (responds by generating a login page) and requests information inputted by this form 
+   str = `
+<body>
+<form action="" method="POST">
+<input type="text" name="username" size="40" placeholder="enter username" ><br /> 
+<input type="password" name="password" size="40" placeholder="enter password"><br />
+<input type="submit" value="Submit" id="submit">
+</form>
+</body>
+   `;
+   response.send(str);
+});
+
 
 
 app.post("/login", function (request, response) {// Process login form POST and redirect to logged in page if ok, back to login page if not
@@ -99,11 +113,11 @@ app.get("/register", function (request, response) {
    
    str = `
 <body>
-<form action="" method="POST">
-<input type="text" name="username" size="40" pattern=".{4,10}" required title="Either 4-10 Characters" placeholder="enter username" ><br />
-<input type="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password"><br />
+<form action="/action_page.php" method="POST">
+<input type="text" name="username" size="40" pattern=".[a-z0-9]{4,10}" required title="Either 4-10 Characters & only numbers/letters" placeholder="enter username" ><br />
+<input type="email" name="email" size="40" placeholder="enter email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
 <input type="password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password again"><br />
-<input type="email" name="email" size="40" placeholder="enter email"><br />
+<input type="password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password again"><br />
 <input type="submit" value="Submit" id="submit">
 </form>
 </body>
@@ -127,18 +141,19 @@ errors.push("Username is Already in Use");
 }
 
 console.log(errors, users_reg_data);
+
 if (errors.length == 0){
    users_reg_data[username] = {};
+   users_reg_data[username].username = request.body.username
    users_reg_data[username].password = request.body.password;
-   users_reg_data[username].email = request.body.email; //validates email
+   users_reg_data[username].email = request.body.email;
+ 
 
    fs.writeFileSync(filename, JSON.stringify(users_reg_data));
    
    response.redirect("/registration" + 'try again');
 
-   if (typeof users_reg_data[password] != typeof users_reg_data[repeat_password]){
-       response.redirect("/registration");
-   }
+  
 } else {
    response.redirect("/Login_Successful");
 }
@@ -150,6 +165,6 @@ if (errors.length == 0){
 
 
 
-
 app.use(express.static('./public'));
 app.listen(8080, () => console.log(`listening on port 8080`));
+
