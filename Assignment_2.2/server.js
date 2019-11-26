@@ -57,15 +57,18 @@ function isNonNegInt(q, returnErrors = false) {
    return returnErrors ? errors : (errors.length == 0);
 }
 
-fs = require('fs'); 
+
+
+fs = require('fs'); //Use the file system module 
 
 //returns a boolean (true or false) (Opens file only if it exists)
 if (fs.existsSync(filename)) {
-   fs.statSync(filename)
+   stats=fs.statSync(filename) //gets the stats of your file
   
 
-data=fs.readFileSync(filename, 'utf-8'); 
-users_reg_data = JSON.parse(data);
+data=fs.readFileSync(filename, 'utf-8'); //Reads the file and returns back with data and then continues with code as requested.
+console.log(typeof data); //shows on the console the type of data
+users_reg_data = JSON.parse(data); //Parses data in order to turn string into an object
 /*
 username = 'newuser';
 users_reg_data[username] = {};
@@ -74,7 +77,7 @@ users_reg_data[username].email = 'newuser@user.com';
 
 fs.writeFileSync(filename, JSON.stringify(users_reg_data));
 */
-console.log(users_reg_data);
+console.log(users_reg_data); //Displays registration data on the console
 
 } else {
    console.log(filename+ 'does not exist ')
@@ -101,7 +104,7 @@ app.post("/login", function (request, response) {// Process login form POST and 
     the_username= request.body.username;
     if(typeof users_reg_data[the_username] != 'undefined'){ //To check if the username exists in the json data
         if( users_reg_data[the_username].password ==request.body.password){
-            response.send('/Login_Succesful')
+            response.send('/Login_Successful')
         } else {
             response.redirect('/login') //IN ASSIGNMENT, SHOW THERE IS AN ERROR
         }
@@ -113,12 +116,13 @@ app.get("/register", function (request, response) {
    
    str = `
 <body>
-<form action="/action_page.php" method="POST">
-<input type="text" name="username" size="40" pattern=".[a-z0-9]{4,10}" required title="Either 4-10 Characters & only numbers/letters" placeholder="enter username" ><br />
-<input type="email" name="email" size="40" placeholder="enter email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
-<input type="password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password again"><br />
-<input type="password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password again"><br />
-<input type="submit" value="Submit" id="submit">
+<form  method="POST" onsubmit=validatePassword() >
+<input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30" placeholder="Enter First & Last Name"><br />
+<input type="text" name="username" size="40" pattern=".[a-z0-9]{4,10}" required title="Either 4-10 Characters & only numbers/letters" placeholder="Enter Username" ><br />
+ <input type="email" name="email" size="40" placeholder="Enter Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
+ <input type="password" id="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password" ><br />
+ <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password Again"><br />
+ <input type="submit" value="Submit" id="submit">
 </form>
 </body>
    `;
@@ -165,6 +169,6 @@ if (errors.length == 0){
 
 
 
-app.use(express.static('./public'));
-app.listen(8080, () => console.log(`listening on port 8080`));
+app.use(express.static('./public')); //sets up a request to respond to GET and looks for the file from public (sets up static web server)
+app.listen(8080, () => console.log(`listening on port 8080`)); //listens on Port 8080
 
