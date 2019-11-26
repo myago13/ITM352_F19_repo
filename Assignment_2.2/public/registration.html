@@ -2,6 +2,7 @@
         <link href="pretty.css" rel="stylesheet">
     <script>src="server.js"</script>
 <head>
+        <h1>Sunrise Flower Shop</h1>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,13 +12,15 @@
 
   
 <body>
+    <div>
 <form  method="POST" onsubmit=validatePassword() >
- <input type="text" name="username" size="40" pattern=".[a-z0-9]{4,10}" required title="Either 4-10 Characters & only numbers/letters" placeholder="enter username" ><br />
- <input type="email" name="email" size="40" placeholder="enter email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
- <input type="password" id="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password" ><br />
- <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="enter password again"><br />
+<input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30" placeholder="Enter First & Last Name"><br />
+<input type="text" name="username" size="40" pattern=".[a-z0-9]{4,10}" required title="Either 4-10 Characters & only numbers/letters" placeholder="Enter Username" ><br />
+ <input type="email" name="email" size="40" placeholder="Enter Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
+ <input type="password" id="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password" ><br />
+ <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password Again"><br />
  <input type="submit" value="Submit" id="submit">
-</form>
+</form></div>
 <script>
     var password = document.getElementById("password") //turns password into an object
     ,repeat_password = document.getElementById("repeat_password"); //turns repeat password into an object
