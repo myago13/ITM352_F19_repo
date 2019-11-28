@@ -7,7 +7,7 @@ var products = require("./public/product.js"); //uses flower products listed in 
 var filename = 'user_data.json' //Defines the user_data.json array as an object
 var app = express(); //Executes Express
 var qs = require('querystring');
-
+var qstr =  {};
 
 
 
@@ -129,15 +129,15 @@ app.post("/login.html", function (request, response) {// Process login form POST
     if(typeof users_reg_data[the_username] != 'undefined'){ //To check if the username exists in the json data
         if( users_reg_data[the_username].password ==request.body.password){
                  //make the query string of prod quant needed for invoice
-                 theQuantQuerystring = qs.stringify([the_username]);
-                 response.redirect('/invoice.html?' + theQuantQuerystring);
+                 theQuantQuerystring = qs.stringify([the_username]); 
+                 response.redirect('/invoice.html?' + theQuantQuerystring); //ADDS USERNAME INFO TO INVOICE
         } else {
             response.redirect('/login.html') //IN ASSIGNMENT, SHOW THERE IS AN ERROR
         }
     }
 });
 
-app.get("/registration.html", function (request, response) {
+app.get("public/registration.html", function (request, response) {
    // Give a simple register form
    
    str = `
@@ -155,7 +155,7 @@ app.get("/registration.html", function (request, response) {
 
 <body>
 <div>
-<form  method="POST" action="./invoice.html" onsubmit=validatePassword() >
+<form  method="POST" action="" onsubmit=validatePassword() >
 <input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30" placeholder="Enter First & Last Name"><br />
 <input type="text" name="username" size="40" pattern=".[a-z0-9]{4,10}" required title="Either 4-10 Characters & only numbers/letters" placeholder="Enter Username" ><br />
 <input type="email" name="email" size="40" placeholder="Enter Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
@@ -178,22 +178,7 @@ app.get("/registration.html", function (request, response) {
 app.post("/registration.html", function (request, response) {
    // process a simple register form
 
-   //Validate
-   var password = document.getElementById("password") //turns password into an object
-   ,repeat_password = document.getElementById("repeat_password"); //turns repeat password into an object
-   
-   function validatePassword(){ //DOES NOT WORK
-     if(password.value != repeat_password.value) { //if password is not equal to repeat password, say passwords don't match
-       alert("Passwords Don't Match");
-   response.redirect('/registration.html') 
-     } 
-   else{
-      response.redirect('/invoice.html') 
-   }
-   
-   }
-    validatePassword();
-
+ 
    //Save new user to file name (users_reg_data)
    username = request.body.username;
    
