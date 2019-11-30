@@ -2,6 +2,23 @@
 <script>
  //invoice loads after functions in flower shop are checked 
   let params = (new URL(document.location)).searchParams;
+  
+  if(params.has('username')){
+  
+   
+  }
+  else{
+    alert('you must login or register before checkout');
+    window.location = 'login.html';
+    window.stop();
+  }
+
+  if(params.has('[`quantity${i}`]')) {} 
+  else{
+    alert('You must enter the amount of flowers you want to purchase');
+    window.location = 'flowershop.html';
+    window.stop();}
+  
   var quantities = [];
   if (params.has('purchase_submit')) {
     for (i = 0; i < products.length; i++) {
@@ -14,6 +31,11 @@
     document.write('no form submitted');
   }
   console.log(quantities);
+  //window.onload= function ()  {//Does function when page is loaded
+ // name= document.getElementById("display_name").innerHTML; //sets innerhtml to display name by default
+  //if (params.has(Welcome + "theQuantQuerystring")){ 
+  //showname = params.get("theQuantQuerystring");
+  //}}
 /*table to create the invoice
 linked what is in the table to the product.js where all the prices items and pictures are
 */
@@ -30,6 +52,7 @@ linked what is in the table to the product.js where all the prices items and pic
 <body>
   <header>
     <h1>Sunrise Flower Shop</h1>
+    <h1> <script>document.write(`Thank you for your purchase ${params.get('username')}!!!`);</script> </h1>
   </header>
   
   <table border="2">
@@ -58,7 +81,7 @@ linked what is in the table to the product.js where all the prices items and pic
           }
         }
         // Compute tax 
-        var tax_rate = 0.0575
+        var tax_rate = 0.04712;
         var tax = subtotal * tax_rate;
         // Compute shipping
         if (subtotal >= 100) {
@@ -85,7 +108,7 @@ linked what is in the table to the product.js where all the prices items and pic
       </tr>
       <tr>
         <td  colspan="3" width="67%">Tax @
-          <script>document.write(100 * tax_rate);</script>%</span></td>
+          <script>document.write( tax_rate);</script>%</span></td>
         <td width="54%">$
           <script>document.write(tax.toFixed(2));</script>
         </td>
@@ -103,11 +126,14 @@ linked what is in the table to the product.js where all the prices items and pic
       </tr>
       <tr>
         <td  colspan="5" width="121%"><strong>
-            OUR SHIPPING POLICY IS: <br>
+               
+          OUR SHIPPING POLICY IS: <br>
             Subtotals of $0 - $49.99 will be charged $2 shipping. <br>
             Subtotals of $50 - $99.99 will be charged $5 shipping. <br>
             Subtotals over $100 will be charged 5% of the subtotal amount. <br>
+           
           </strong></td>
+        
 
       </tr>
     </tbody>
