@@ -1,35 +1,50 @@
-<!DOCTYPE html>
+  
 <html lang="en">
+    <link href="pretty.css" rel="stylesheet">
+<script>src="server.js"</script>
 <head>
-<meta charset="utf-8">
-<title>JavaScript Form Validation using a sample registration form</title>
-<meta name="keywords" content="example, JavaScript Form Validation, Sample registration form" />
-<meta name="description" content="This document is an example of JavaScript Form Validation using a sample registration form. " />
-<link rel='stylesheet' href='registration.css' type='text/css' />
-
-<script src="sample-registration-form-validation.js"></script>
+    <h1>Sunrise Flower Shop</h1>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
 </head>
+<body>
 
-<body onload="document.registration.userid.focus();">
-<h1>Registration Form</h1>
-Use tab keys to move from one input field to the next.
 
-<form name='registration' onSubmit="return formValidation();">
-    <ul>
-        <li><label for="userid">User id:</label></li>
-        <li><input type="text" name="userid" size="12" /></li>
+<body>
+<div>
+<form  method="POST" action="" onsubmit=validatePassword() >
+<input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30" placeholder="Enter First & Last Name"><br />
+<input type="text" name="username" size="40" pattern=".[a-z0-9]{4,10}" required title="Either 4-10 Characters & only numbers/letters" placeholder="Enter Username" ><br />
+<input type="email" name="email" size="40" placeholder="Enter Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
+<input type="password" id="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password" ><br />
+<input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password Again"><br />
 
-        <li><label for="passid">Password:</label></li>
-        <li><input type="password" name="passid" size="12" /></li>
+<input type="submit" value="Submit" id="submit">
+</form></div>
+<script>
+var password = document.getElementById("password") //turns password into an object
+,repeat_password = document.getElementById("repeat_password"); //turns repeat password into an object
 
-        <li><label for="username">Name:</label></li>
-        <li><input type="text" name="username" size="50" /></li>
+function validatePassword(){
+  if(password.value != repeat_password.value) { //if password is not equal to repeat password, say passwords don't match
+    alert("Passwords Don't Match");
+response.redirect('public/registration.html') 
+  } 
+else{
+    response.redirect('Login_Successful') 
+}
 
-        <li><label for="email">Email:</label></li>
-        <li><input type="text" name="email" size="50" /></li>
-        
-        <li><input type="submit" name="submit" value="Submit" /></li>
-    </ul>
-</form>
+}
+  validatePassword();
+</script>
+</body>
+
+
+
+
 </body>
 </html>
+
+<script>
