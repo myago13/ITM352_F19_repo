@@ -111,7 +111,7 @@ app.get("/login.html", function (request, response) {
   // Process login form POST and redirect to invoice page if ok and back to login page if not
 app.post("/login.html", function (request, response) {
     console.log(flowerquant);
-    the_username= request.body.username;
+    the_username= request.body.username.toLowerCase(); //makes username case insensitive
     //Validate login data
     if(typeof users_reg_data[the_username] != 'undefined'){   //To check if the username exists in the json data
       if( users_reg_data[the_username].password ==request.body.password){
