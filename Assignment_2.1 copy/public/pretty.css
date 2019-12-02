@@ -1,3 +1,5 @@
+/* Description: A CSS page that styles the html pages. */
+/*Jayla Kaita & Melissa Yago 12/1/19*/
 /*products page*/
 h1 {
     color: rgb(179, 203, 248);
@@ -45,7 +47,7 @@ h1 {
     margin-left: auto;
     margin-right: auto;
   }
-  
+  /*invoice table*/
   th, td {
     padding: 5px;
     text-align: center;
