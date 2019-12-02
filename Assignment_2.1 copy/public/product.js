@@ -1,4 +1,5 @@
-  
+//Description: json array that contains all five products with their respective price, description and image. Above is a variable called products that defines the array that is used in the invoice and flowershop html page.
+//Jayla Kaita & Melissa Yago 12/1/19- Code is used from previous Assignment 1
 var products = [
     { 
      "flower" : "Catharanthus",
