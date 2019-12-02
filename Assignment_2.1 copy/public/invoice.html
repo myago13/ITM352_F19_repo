@@ -1,20 +1,22 @@
+<script>
+//Description: This file is the invoice that contains the calculations based on the quantity and products selected from the flowershop html page
+//Jayla Kaita & Melissa Yago 12/1/19-Code is adapted from Invoice 2 WOD Exercise
+</script>
 <script src="./product.js" type=""></script>
 <script>
  //invoice loads after functions in flower shop are checked 
   let params = (new URL(document.location)).searchParams;
   
   if(params.has('username')){
-  
-   
   }
-  else{
+  else{ //if the invoice page doesn't recieve username info, it will display a message that says please purchase/login before checkout and take the use to the flowershop.html page
     alert('Please purchase and/or login before checkout');
     window.location = 'flowershop.html';
     window.stop();
   }
 
- 
-
+//Form was submitted so initiate the invoice by taking the quantities that were submitted for each product
+//If you went to invoice.html directly without submitting any quanitites, you will get a no form submitted
   var quantities = [];
   if (params.has('purchase_submit')) {
     for (i = 0; i < products.length; i++) {
@@ -27,13 +29,11 @@
     document.write('no form submitted');
   }
   console.log(quantities);
-  //window.onload= function ()  {//Does function when page is loaded
- // name= document.getElementById("display_name").innerHTML; //sets innerhtml to display name by default
-  //if (params.has(Welcome + "theQuantQuerystring")){ 
-  //showname = params.get("theQuantQuerystring");
-  //}}
+
+
+
 /*table to create the invoice
-linked what is in the table to the product.js where all the prices items and pictures are
+Linked is what is in the table to the product.js where all the prices items and pictures are
 */
 </script>
 
@@ -47,7 +47,7 @@ linked what is in the table to the product.js where all the prices items and pic
 
 <body>
   <header>
-    <h1>Sunrise Flower Shop</h1>
+    <h1>Sunrise Flower Shop Invoice</h1>
     <h1> <script>document.write(`Thank you for your purchase ${params.get('username')}!!!`);</script> </h1>
   </header>
   
@@ -60,9 +60,10 @@ linked what is in the table to the product.js where all the prices items and pic
         <th width="54%">Extended Price</th>
       </tr>
       <script>
-        subtotal = 0;
+        subtotal = 0; //starting amount till prices are calculated and added up
+        //If the quantity's of the products are greater than 0, calculate extended price, subtotal and document write the products purchased, quanitites of each, price and extended price.
         for (i = 0; i < products.length; i++) {
-          if (quantities[i] > 0) {
+          if (quantities[i] > 0) { //product row
             // product row
             extended_price = quantities[i] * products[i].price
             subtotal += extended_price;
@@ -79,6 +80,7 @@ linked what is in the table to the product.js where all the prices items and pic
         // Compute tax 
         var tax_rate = 0.04712;
         var tax = subtotal * tax_rate;
+
         // Compute shipping
         if (subtotal >= 100) {
           var shipping = 0.05 * subtotal
