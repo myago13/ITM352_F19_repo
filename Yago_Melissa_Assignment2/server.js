@@ -129,78 +129,51 @@ app.post("/login.html", function (request, response) {
    }
 });
 
-app.get("/registration.html", function (request, response) {
-   // Give a simple registration form (responds by sending to the registration html page) and requests information inputted by this form 
-   str = `
-   <html lang="en">
-   <link href="pretty.css" rel="stylesheet">
- <script>src="server.js"</script>
- <head>
-   <h1>Sunrise Flower Shop Registration</h1>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <meta http-equiv="X-UA-Compatible" content="ie=edge">
- <title>Document</title>
- </head>
- <body>
- 
- <script>
-   //checks if password is equal to repeat password on html form, if not, then show error message that says passwords don't match, please retype
- function checkpassword() 
- {var p=f.password.value;
- var cp=f.repeat_password.value;
- if(p==cp) {}
- else
- alert("Passwords Don't Match. Please retype")
- response.redirect("registration.html?"); //If passwords don't match, redirect back to registration html page
- }
- </script>
- <script>
- //Below contains the registration validations and guards that prevent error data from being inputted and meet the assignment's requirments
- //Full Username: Only allows letters and 30 characters max
- //Username: Has minimum of 4 characters, maximum 10, letters and numbers are only valid, case insensitive
- //Email: x@y.z format and address contains only numbers, letters and _. in the beginning. The host machine can only contain numbers and letters and the domain name is 2 or 3 letters and case insensitive
- //Password: Is a minimum of 6 characters, any characters are valid (Same requirements is applied to repeat password) 
- </script>
- <body>
- <div>
- <form  name ="f" method="POST" action="" onsubmit=validatePassword() >
- <input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30" placeholder="Enter First & Last Name" required title="Only Letters and add a space"><br />
- <input type="text" name="username" size="40" pattern=".[a-z0-9]{4,10}" required title="Either 4-10 Characters & only numbers/letters" placeholder="Enter Username" ><br />
- <input type="email" name="email" size="40" placeholder="Enter Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{2,3}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
- <input type="password" id="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password" ><br />
- <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password Again"><br />
- 
- <input type="submit" value="Submit" id="submit" value="checkpassword" onclick="checkpassword()">
- </form></div>
- <script>
- 
- </script>
- </body>
- 
- 
- 
- 
- </body>
- </html>
-   `;
-   response.send(str);
-});
-
  // Process registration form POST method and redirect to invoice page if ok or back to registration page if not
 app.post("/registration.html", function (request, response) {
    // process a simple register form
    console.log(flowerquant);
-   the_username= request.body.username;
+ 
    username = request.body.username;//Save new user to file name (users_reg_data)
-   errors = [];//Checks to see if username already exists
+   errors = {};//Checks to see if username already exists
  //Username Validation
 if (typeof users_reg_data[username] != 'undefined'){
-errors.push("Username is Already in Use");
+errors.username_error="Username is Already in Use"; //WORKS
 }
+if ((/[a-z0-9]+/).test(request.body.username) ==false){
+   errors.username_error="Only numbers/letters";
+}
+if ((username.length > 10) ==true){
+   errors.username_error = "Please make your username shorter"; //WORKS
+}
+if ((username.length < 4) ==true){
+   errors.username_error = "Please make your username longer"; //WORKS
+}
+
+
+
+fullname = request.body.fullname;//Save new user to file name (users_reg_data)
+//Fullname Validation //
+if ((/[a-zA-Z]+[ ]+[a-zA-Z]+/).test(request.body.fullname) == false){
+errors.fullname_error="Only use letters and a space";
+}
+
+if ((fullname.length > 30) ==true){
+   errors.fullname_error = "Please make your full name shorter. 30 characters max"; //WORKS
+}
+
+
+//Email Validation//
+if ((/[a-z0-9._]+@[a-z0-9]+\.[a-z]+/).test(request.body.email) == false) {
+errors.email_error="Please enter proper email";
+}
+
+
+
+
 console.log(errors, users_reg_data);
 //If there are 0 errors, request all registration info
-if (errors.length == 0){
+if (Object.keys(errors).length == 0){
    users_reg_data[username] = {};
    users_reg_data[username].username = request.body.username
    users_reg_data[username].password = request.body.password;
@@ -209,9 +182,10 @@ if (errors.length == 0){
  
 fs.writeFileSync(filename, JSON.stringify(users_reg_data)); //Writes registration info into the userdata json file
 theQuantQuerystring = qs.stringify(flowerquant); //Turns quantity object into a string
-   response.redirect("/invoice.html?" + theQuantQuerystring + `&username=${the_username}`); //If all good, send to the invoice page with username/quantity info
+   response.redirect("/invoice.html?" + theQuantQuerystring + `&username=${username}`); //If all good, send to the invoice page with username/quantity info
 } else { 
-   response.redirect('/registration.html?' + 'try again'); //if there are errors, send back to registration page to retype
+   qstring= qs.stringify(request.body)+"&"+qs.stringify(errors); 
+   response.redirect('/registration.html?' + qstring ); //if there are errors, send back to registration page to retype
 }
    
 });
