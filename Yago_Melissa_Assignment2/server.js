@@ -134,32 +134,34 @@ app.post("/registration.html", function (request, response) {
    // process a simple register form
    console.log(flowerquant);
  
-   username = request.body.username;//Save new user to file name (users_reg_data)
+   username = request.body.username;//retrieves the username data
    errors = {};//Checks to see if username already exists
- //Username Validation
+ 
+   //Username Validation
 if (typeof users_reg_data[username] != 'undefined'){
-errors.username_error="Username is Already in Use"; //WORKS
+errors.username_error="Username is Already in Use"; //if username is in json file, say username is already in use
 }
-if ((/[a-z0-9]+/).test(request.body.username) ==false){
+if ((/[a-z0-9]+/).test(request.body.username) ==false){ //only allows numbers and letters for the username
    errors.username_error="Only numbers/letters";
 }
 if ((username.length > 10) ==true){
-   errors.username_error = "Please make your username shorter"; //WORKS
+   errors.username_error = "Please make your username shorter"; //if length is more than 10, show error to make the username shorter
 }
 if ((username.length < 4) ==true){
-   errors.username_error = "Please make your username longer"; //WORKS
+   errors.username_error = "Please make your username longer"; //if length is less than 4, show error to make the username longer
 }
 
 
 
-fullname = request.body.fullname;//Save new user to file name (users_reg_data)
-//Fullname Validation //
+
+//Fullname Validation // got help for the first fullname validation from Mr. Port
+fullname = request.body.fullname;//retrieves the fullname data
 if ((/[a-zA-Z]+[ ]+[a-zA-Z]+/).test(request.body.fullname) == false){
 errors.fullname_error="Only use letters and a space";
 }
 
 if ((fullname.length > 30) ==true){
-   errors.fullname_error = "Please make your full name shorter. 30 characters max"; //WORKS
+   errors.fullname_error = "Please make your full name shorter. 30 characters max"; //if length is greater than 30, send error that 30 characters are max
 }
 
 
