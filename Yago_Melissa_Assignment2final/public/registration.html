@@ -1,0 +1,81 @@
+<script>
+  //Description: Page that contains the user to input their data to become a registered user
+  //Jayla Kaita & Melissa Yago 12/1/19-Code was adapted from Lab 14 hmtl form wise & Stack Exchange (for validation & guard check)
+  window.onload=function (){
+    var urlParams = new URLSearchParams(window.location.search);
+   if (urlParams.has("username")){ //Gets username data and displays in URL
+     f.fullname.value=urlParams.get("fullname");
+     f.username.value=urlParams.get("username");
+     f.email.value=urlParams.get("email");
+     f.password.value=urlParams.get("password");
+     f.repeat_password.value=urlParams.get("repeat_password");
+
+if (urlParams.has("username_error")){ //if there are username errors, get username errors and display in URL
+  username_label.innerHTML=urlParams.get("username_error");
+
+}
+if (urlParams.has("fullname_error")){ //if there are fullname errors, get fullname errors and display in URL
+  fullname_label.innerHTML=urlParams.get("fullname_error");
+
+}
+
+if (urlParams.has("email_error")){ //if there are fullname errors, get fullname errors and display in URL
+  fullname_label.innerHTML=urlParams.get("email_error");
+
+}
+checkpassword();
+
+
+   }
+  }
+  </script>
+  <html lang="en">
+    <link href="pretty.css" rel="stylesheet">
+
+  <head>
+    <h1>Sunrise Flower Shop Registration</h1>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  </head>
+  <body>
+  
+  <script>
+    //checks if password is equal to repeat password on html form, if not, then show error message that says passwords don't match, please retype
+  function checkpassword() 
+  {var p=f.password.value;
+  var cp=f.repeat_password.value;
+  if(p==cp) {}
+  else
+  alert("Passwords Don't Match. Please retype")
+  response.redirect("registration.html?"); //If passwords don't match, redirect back to registration html page
+  }
+  </script>
+  <script>
+  //Below contains the registration validations and guards that prevent error data from being inputted and meet the assignment's requirments
+  //Full Username: Only allows letters and 30 characters max
+  //Username: Has minimum of 4 characters, maximum 10, letters and numbers are only valid, case insensitive
+  //Email: x@y.z format and address contains only numbers, letters and _. in the beginning. The host machine can only contain numbers and letters and the domain name is 2 or 3 letters and case insensitive
+  //Password: Is a minimum of 6 characters, any characters are valid (Same requirements is applied to repeat password) 
+  </script>
+  <body>
+  <div>
+  <form  name ="f" method="POST" action=""  >
+  <input type="text" name="fullname" size="40"  placeholder="Enter First & Last Name" ><label for="fullname" id="fullname_label"></label><br /> 
+  <input type="text" name="username" size="40" required title="Either 4-10 Characters & only numbers/letters" placeholder="Enter Username" ><label for="username" id="username_label"></label><br />
+  <input type="email" name="email" size="40" placeholder="Enter Email" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><label for="email" id="email_label"></label><br />
+  <input type="password" id="password" name="password"  size="40"  required title="6 characters minimum" placeholder="Enter Password" ><label for="password" id="password_label"></label><br />
+  <input type="password" id="repeat_password" name="repeat_password" size="40"  required title="6 characters minimum" placeholder="Enter Password Again"><br />
+  
+  <input type="submit" value="Submit" id="submit" value="checkpassword" onclick="checkpassword()">
+  </form></div>
+  <script>
+  </script>
+  </body>
+  
+  
+  
+  
+  </body>
+  </html>

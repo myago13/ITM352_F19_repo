@@ -1,0 +1,54 @@
+/*products page*/
+h1 {
+  color: rgb(179, 203, 248);
+  text-align: center;
+  font-style: inherit;
+  font-display: inherit;
+  text-shadow: -1px 0  white, 0 1px  white, 1px 0  white, 0 -1px  white;
+}
+
+h2 {
+    color:  salmon;
+    text-align: center;
+    text-shadow: -1px 0  white, 0 1px  white, 1px 0  white, 0 -1px  white;
+}
+/*page background*/
+body {
+    
+    justify-content: space-around;
+    background: url(./images/sky.jpg); 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+}
+/*pictures of flowers*/
+img
+{
+  width: 200px;
+  height: 200px;
+  border: 3px solid salmon;
+}
+
+div {
+  align-content: center;
+  text-align: center;
+  color: palevioletred;
+}
+/*purchase submit button*/
+input {
+color: salmon;
+}
+/*invoice*/
+table{
+  color: rgb(96, 0, 134);
+  text-align: center;
+  border-color: lavender;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th, td {
+  padding: 5px;
+  text-align: center;
+  color: white;
+  background:  rgb(212, 212, 248);
+}

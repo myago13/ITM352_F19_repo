@@ -99,9 +99,8 @@ if (errors.length == 0){
     fs.writeFileSync(filename, JSON.stringify(users_reg_data));
     
     response.redirect("/register");
-    if (typeof users_reg_data[password] != typeof users_reg_data[repeat_password]){
-        response.redirect("/register");
-    }
+   
+    
 } else {
     response.redirect("/register");
 }

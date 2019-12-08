@@ -1,0 +1,55 @@
+<script>
+  //Description: Page that contains the user to input their data to become a registered user
+  //Jayla Kaita & Melissa Yago 12/1/19-Code was adapted from Lab 14 hmtl form wise & Stack Exchange (for validation & guard check)
+  </script>
+  <html lang="en">
+    <link href="pretty.css" rel="stylesheet">
+  <script>src="server.js"</script>
+  <head>
+    <h1>Sunrise Flower Shop Registration</h1>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Registration</title>
+  </head>
+  <body>
+  
+  <script>
+    //checks if password is equal to repeat password on html form, if not, then show error message that says passwords don't match, please retype
+  function checkpassword() 
+  {var p=f.password.value;
+  var cp=f.repeat_password.value;
+  if(p==cp) {
+  response.redirect("invoice.html?");
+  }else{
+  alert("Passwords Don't Match. Please retype")
+  response.redirect("registration.html?"); //If passwords don't match, redirect back to registration html page
+  }}
+  </script>
+  <script>
+  //Below contains the registration validations and guards that prevent error data from being inputted and meet the assignment's requirments
+  //Full Name: Only allows letters and 30 characters max
+  //Username: Has minimum of 4 characters, maximum 10, letters and numbers are only valid, case insensitive
+  //Email: x@y.z format and address contains only numbers, letters and _. in the beginning. The host machine can only contain numbers and letters and the domain name is 2 or 3 letters and case insensitive
+  //Password: Is a minimum of 6 characters, any characters are valid (Same requirements is applied to repeat password) 
+  </script>
+  <body>
+  <div>
+  <form  name ="f" method="POST" action="" onsubmit=validatePassword() >
+  <input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30" placeholder="Enter First & Last Name" required title="Only Letters and add a space"><br />
+  <input type="text" name="username" size="40" pattern=".[a-z0-9]{4,10}" required title="Either 4-10 Characters & only numbers/letters" placeholder="Enter Username" ><br />
+  <input type="email" name="email" size="40" placeholder="Enter Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{2,3}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
+  <input type="password" id="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password" ><br />
+  <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password Again"><br />
+  
+  <input type="submit" value="Submit" id="submit" value="checkpassword" onclick="checkpassword()">
+  </form></div>
+  <script>
+  </script>
+  </body>
+  
+  
+  
+  
+  </body>
+  </html>

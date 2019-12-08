@@ -4,7 +4,7 @@ const querystring = require('querystring'); //Cannot change anything within the 
 
 var express = require('express'); //initializes express to set up web server
 var myParser = require("body-parser"); //initializes body-parser to set up web server
-var products = require("./public/product.js"); //uses flower products listed in the product.js file
+var products = require("./public/product.js.js"); //uses flower products listed in the product.js file
 var filename = 'user_data.json' //Defines the user_data.json array as an object
 var app = express(); //Executes Express
 var qs = require('querystring'); //Needs querystring in order to initiate functions

@@ -1,4 +1,5 @@
-var products = require('./product_data')
+var data = require('./public/product_data.js');
+var products = data.products;
 var express = require('express');
 var myParser = require("body-parser");
 var app = express();
@@ -14,6 +15,8 @@ app.postprocess_quantity_form(request.body, response); {
   
  function process_quantity_form (POST, response) { 
    console.log(request.query);
+   let model = products[0]['model'];
+let model_price = products[0]['price'];
    if (typeof POST['quantity_textbox'] != 'undefined'){
     displayPurchase(POST, response);
    

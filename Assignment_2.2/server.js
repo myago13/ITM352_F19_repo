@@ -10,10 +10,7 @@ var app = express(); //Executes Express
 
 
 
-app.all('*', function (request, response, next) {
-   console.log(request.method + ' to ' + request.path); //respond to HTTP request by sending type of request and the path of request
-   next(); //calls the middleware function
-});
+
 
 app.use(myParser.urlencoded({ extended: true }));
 //intercept purchase submission form, if good give an invoice, otherwise send back to order page
@@ -83,57 +80,118 @@ console.log(users_reg_data); //Displays registration data on the console
    console.log(filename+ 'does not exist ')
 }
 
-app.get("/login", function (request, response) {
+
+//GETS TO LOGIN PAGE
+app.get("/login.html", function (request, response) {
    // Give a simple login form (responds by generating a login page) and requests information inputted by this form 
    str = `
+   <html lang="en">
+   <link href="pretty.css" rel="stylesheet">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+</head>
+
+<h1>Sunrise Flower Shop</h1>
+
+<h2>To continue purchasing, please login below!</h2>
+
 <body>
-<form action="" method="POST">
-<input type="text" name="username" size="40" placeholder="enter username" ><br /> 
-<input type="password" name="password" size="40" placeholder="enter password"><br />
-<input type="submit" value="Submit" id="submit">
-</form>
+<form action="" method="POST"> 
+   <div>
+   <input type="text" name="username" size="40" placeholder="enter username" ><br /> 
+   <input type="password" name="password" size="40" placeholder="enter password"><br />
+   <input type="submit" value="Submit" id="submit">  </div>
+   </form>  
 </body>
+
+<h2>Are you a new user? Click below to register on our site!</h2>
+
+<body>
+<div>
+<form action="./registration.html">
+<input type="submit" value="Register Here" id="register_here" name="register_here">
+</form>
+</div>
+
+</body>
+</html>
    `;
    response.send(str);
 });
 
 
 
-app.post("/login", function (request, response) {// Process login form POST and redirect to logged in page if ok, back to login page if not
+app.post("/login.html", function (request, response) {// Process login form POST and redirect to logged in page if ok, back to login page if not
     console.log(request.body);
     the_username= request.body.username;
     if(typeof users_reg_data[the_username] != 'undefined'){ //To check if the username exists in the json data
         if( users_reg_data[the_username].password ==request.body.password){
-            response.send('/Login_Successful')
+            response.redirect('/invoice.html')
         } else {
-            response.redirect('/login') //IN ASSIGNMENT, SHOW THERE IS AN ERROR
+            response.redirect('/login.html') //IN ASSIGNMENT, SHOW THERE IS AN ERROR
         }
     }
 });
 
-app.get("/register", function (request, response) {
+app.get("/registration.html", function (request, response) {
    // Give a simple register form
    
    str = `
+   <html lang="en">
+   <link href="pretty.css" rel="stylesheet">
+<head>
+   <h1>Sunrise Flower Shop</h1>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+</head>
 <body>
-<form  method="POST" onsubmit=validatePassword() >
+
+
+<body>
+<div>
+<form  method="POST" action="./invoice.html" onsubmit=validatePassword() >
 <input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30" placeholder="Enter First & Last Name"><br />
 <input type="text" name="username" size="40" pattern=".[a-z0-9]{4,10}" required title="Either 4-10 Characters & only numbers/letters" placeholder="Enter Username" ><br />
- <input type="email" name="email" size="40" placeholder="Enter Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
- <input type="password" id="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password" ><br />
- <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password Again"><br />
- <input type="submit" value="Submit" id="submit">
-</form>
+<input type="email" name="email" size="40" placeholder="Enter Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$" required title="Error!! Make sure your email contains the following... 1. @ sign 2. Three letters in domain name 3. Only numbers/characters and _ & . may be used. "><br />
+<input type="password" id="password" name="password"  size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password" ><br />
+<input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password Again"><br />
+<input type="submit" value="Submit" id="submit">
+</form></div>
+
+
+
+
+
+
 </body>
+</html>
    `;
    response.send(str);
 });
 
-app.post("/register", function (request, response) {
+app.post("/registration.html", function (request, response) {
    // process a simple register form
 
    //Validate
-
+   var password = document.getElementById("password") //turns password into an object
+   ,repeat_password = document.getElementById("repeat_password"); //turns repeat password into an object
+   
+   function validatePassword(){
+     if(password.value != repeat_password.value) { //if password is not equal to repeat password, say passwords don't match
+       alert("Passwords Don't Match");
+   response.redirect('/registration.html') 
+     } 
+   else{
+      response.redirect('/invoice.html') 
+   }
+   
+   }
+    validatePassword();
    //Save new user to file name (users_reg_data)
    username = request.body.username;
    
@@ -155,11 +213,11 @@ if (errors.length == 0){
 
    fs.writeFileSync(filename, JSON.stringify(users_reg_data));
    
-   response.redirect("/registration" + 'try again');
+   response.redirect("/registration.html" + 'try again');
 
   
 } else {
-   response.redirect("/Login_Successful");
+   response.redirect("/invoice.html");
 }
    
 });
@@ -168,7 +226,10 @@ if (errors.length == 0){
 
 
 
-
+app.all('*', function (request, response, next) {
+   console.log(request.method + ' to ' + request.path); //respond to HTTP request by sending type of request and the path of request
+   next(); //calls the middleware function
+});
 app.use(express.static('./public')); //sets up a request to respond to GET and looks for the file from public (sets up static web server)
 app.listen(8080, () => console.log(`listening on port 8080`)); //listens on Port 8080
 
