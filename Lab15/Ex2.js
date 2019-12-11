@@ -7,6 +7,8 @@ var session = require('express-session');
 
 app.use(session({secret: "ITM 352 rocks"}));
 app.use(myParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({secret: "ITM352 rocks!"}));
 
 fs = require('fs'); 
 
@@ -36,10 +38,6 @@ console.log(users_reg_data);
 
 
 app.get("/login", function (request, response) {
-    if(typeof request.cookies.username != 'undefined'){
-        response.send(`Welcome back ${request.cookies.username}!` + '<br>'
-        + `you last logged in on ${request.cookies.last_login}`);
-    }
     // Give a simple login form (responds by generating a login page)
     str = `
 <body>
@@ -54,7 +52,6 @@ app.get("/login", function (request, response) {
  });
 
 app.post("/login", function (request, response) {
-
     // Process login form POST and redirect to logged in page if ok, back to login page if not. Action is executed when button is submitted
     console.log(request.body);
     the_username= request.body.username;
@@ -70,9 +67,7 @@ app.post("/login", function (request, response) {
           }
          
             request.session.last_login = now;
-            response //chain method
-            .cookie('username', the_username, {maxAge: 60*1000})
-            .send(msg + '<br>' + `${the_username} is logged in at ${now}`);
+            response.send(msg + '<br>' + `${the_username} is logged in at ${now}`);
         } else {
             response.redirect('/login') //IN ASSIGNMENT, SHOW THERE IS AN ERROR
         }
@@ -132,11 +127,11 @@ if (errors.length == 0){
      response.send('Welcome your session ID is ${request.session.id}');
  })
  
- app.get('/set_cookie', function (request,response) {
-response.cookie('myname', 'Melissa Yago', {maxAge: 5*1000}).send('Welcome to the Cookie Page Melissa Yago');
- });
+ app.get('/set_cookie', function(request, response) {
+    response.cookie('myname', 'Melissa Yago', {maxAge: 10000}).send('cookie set');
+});
 
- app.get('/use_cookie', function(request, response) {
+app.get('/use_cookie', function(request, response) {
     output = "No myname cookie found";
     if (typeof request.cookies.myname != 'undefined') {
         output = `Welcome to the Use Cookie Page ${request.cookies.myname}` ;
@@ -144,7 +139,6 @@ response.cookie('myname', 'Melissa Yago', {maxAge: 5*1000}).send('Welcome to the
     response.send(output);
 
 });
+ 
 
 app.listen(8080, () => console.log(`listening on port 8080`));
-app.use(cookieParser());
-app.use(session({secret: "ITM352 rocks!"}));

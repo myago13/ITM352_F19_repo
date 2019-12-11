@@ -2,11 +2,14 @@ var express = require('express');
 var app = express();
 var myParser = require("body-parser");
 var cookieParser = require('cookie-parser');
-var session = require('express-session');
+var session = require("express-session");
+var qs = require('querystring');
 
 
 app.use(session({secret: "ITM 352 rocks"}));
 app.use(myParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({secret: "ITM352 rocks!"}));
 
 fs = require('fs'); 
 
@@ -33,13 +36,9 @@ console.log(users_reg_data);
     console.log(filename+ 'does not exist ')
 }
 
-
+var user_product_quantities = {};
 
 app.get("/login", function (request, response) {
-    if(typeof request.cookies.username != 'undefined'){
-        response.send(`Welcome back ${request.cookies.username}!` + '<br>'
-        + `you last logged in on ${request.cookies.last_login}`);
-    }
     // Give a simple login form (responds by generating a login page)
     str = `
 <body>
@@ -53,36 +52,42 @@ app.get("/login", function (request, response) {
     response.send(str);
  });
 
-app.post("/login", function (request, response) {
+ app.post("/login", function (request, response) {
+    // Process login form POST and redirect to logged in page if ok, back to login page if not
+    console.log(user_product_quantities);
+    the_username = request.body.username;
+    if (typeof users_reg_data[the_username] != 'undefined') {
+        if (users_reg_data[the_username].password == request.body.password) {
+            // make the query string of prod quant needed for invoice
+            theQuantQuerystring = qs.stringify(user_product_quantities);
+            //response.redirect('/invoice.html?' + theQuantQuerystring);
 
-    // Process login form POST and redirect to logged in page if ok, back to login page if not. Action is executed when button is submitted
-    console.log(request.body);
-    the_username= request.body.username;
-    
-    if(typeof users_reg_data[the_username] != 'undefined'){
-        if( users_reg_data[the_username].password ==request.body.password){
-            theQuantQuertystring= qs.stringify(users_reg_data);
-          if(typeof request.session.last_login != 'undefined'){
-            var msg =`you last logged in on ${request.session.last_login}`; 
-            var now = new Date();   
-          } else{
-              now = 'first login';
-          }
-         
+            if (typeof request.session.last_login != 'undefined')
+            {
+                var msg = `You last logged in at ${request.session.last_login}`;
+                var now = new Date();
+            } else {
+                var msg = '';
+                var now = 'first visit';
+            }
             request.session.last_login = now;
-            response //chain method
-            .cookie('username', the_username, {maxAge: 60*1000})
-            .send(msg + '<br>' + `${the_username} is logged in at ${now}`);
+            response.send(`${msg} <BR>${the_username} logged in at ${now}`);
         } else {
-            response.redirect('/login') //IN ASSIGNMENT, SHOW THERE IS AN ERROR
+            response.redirect('/login');
         }
-    }
-});
+}});
+
+
 
 app.get("/register", function (request, response) {
     // Give a simple register form
     
-    str = `
+    console.log("GET login");
+    if (typeof request.cookies.username != 'undefined') {
+        response.send(`Welcome ${request.cookies.username}` +
+        '<BR>' + `You last logged in on ${request.session.last_login}`);
+    } else {
+        str = `
 <body>
 <form action="" method="POST">
 <input type="text" name="username" size="40" placeholder="enter username" ><br />
@@ -94,7 +99,7 @@ app.get("/register", function (request, response) {
 </body>
     `;
     response.send(str);
- });
+ }});
 
  app.post("/register", function (request, response) {
     // process a simple register form
@@ -128,15 +133,16 @@ if (errors.length == 0){
     
  });
 
- app.get('/use_session', function (request, response){
-     response.send('Welcome your session ID is ${request.session.id}');
- })
+ app.get('/use_session', function(request, response) {
+    response.send(`Welcome, your session ID is ${request.sessionID}`);
+    request.session.destroy();
+});
  
- app.get('/set_cookie', function (request,response) {
-response.cookie('myname', 'Melissa Yago', {maxAge: 5*1000}).send('Welcome to the Cookie Page Melissa Yago');
- });
+ app.get('/set_cookie', function(request, response) {
+    response.cookie('myname', 'Melissa Yago', {maxAge: 10000}).send('cookie set');
+});
 
- app.get('/use_cookie', function(request, response) {
+app.get('/use_cookie', function(request, response) {
     output = "No myname cookie found";
     if (typeof request.cookies.myname != 'undefined') {
         output = `Welcome to the Use Cookie Page ${request.cookies.myname}` ;
@@ -144,7 +150,6 @@ response.cookie('myname', 'Melissa Yago', {maxAge: 5*1000}).send('Welcome to the
     response.send(output);
 
 });
+ 
 
 app.listen(8080, () => console.log(`listening on port 8080`));
-app.use(cookieParser());
-app.use(session({secret: "ITM352 rocks!"}));
