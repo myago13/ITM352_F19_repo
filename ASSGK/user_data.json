@@ -2,7 +2,8 @@
     "ebmember": {
         "password": "golden",
         "email": "gk@hawaii.edu",
-        "fullname": "Executive Board Member"
+        "fullname": "Executive Board Member",
+        "usertype": "Webmaster"
     },
     "dport": {
         "name": "Dan Port",
@@ -20,13 +21,16 @@
         "email": "itm352@hawaii.edu"
     },
     "msyago": {
+        "username": "msyago",
         "password": "doggy600",
         "email": "msyago@hawaii.edu",
-        "fullname": "Melissa Yago"
+        "fullname": "Melissa Yago",
+        "usertype": "Webmaster"
     },
     "jaylakai": {
+        "username": "jaylakai",
         "password": "123456",
         "email": "jaylakai@hawaii.edu",
-        "fullname": "Jayla Kaita"
-    }
-}
+        "fullname": "Jayla Kaita",
+        "usertype": "regular"
+}}
