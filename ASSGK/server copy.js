@@ -25,62 +25,25 @@ users_reg_data = JSON.parse(data); //Parses data in order to turn string into an
 //GETS TO POINTS PAGE
 
 
-  // Process login form POST and redirect to Total Points Page. If incorrect login info is inputted, show error
+  // Process login form POST and redirect to invoice page if ok and back to login page if not
 app.post("/login.html", function (request, response) {
-    the_username= request.body.username; //makes username 
+    the_username= request.body.username.toLowerCase(); //makes username case insensitive
     //Validate login data
     if(typeof users_reg_data[the_username] != 'undefined'){   //To check if the username exists in the json data
       if( users_reg_data[the_username].password ==request.body.password){
            
-               response.redirect('/Total_ptpg.html?' + `&username=${the_username}`); //Adds username to Total Points Page
+               response.redirect('/Total_ptpg.html?' + `&username=${the_username}`); //Adds username & quantity to invoice
       }
-     
        else {
           response.send('Invalid Login: Please hit the back button and try again'); //if password isn't equal to password existing in jsonn data, show error message
        
       }
-    //if(typeof users_reg_data['ebmember'].password ==request.body.password2) {
-      // response.redirect('/master_mainpg.html?');
-      //}
-       //else {
-         // response.send('Invalid Login: Please hit the back button and try again'); //if password isn't equal to password existing in jsonn data, show error message
-       
-   //   }
       
   }
 
 });
 
 
-
-
-app.post("/webmasterLogin.html", function (request, response) {
-    the_username= request.body.username; //makes username 
-    //Validate login data
-    if(typeof users_reg_data[the_username] != 'undefined'){   //To check if the username exists in the json data
-      if( users_reg_data[the_username].password ==request.body.password){
-           
-               response.redirect('/Total_ptpg.html?' + `&username=${the_username}`); //Adds username to Total Points Page
-      }
-     
-       else {
-          response.send('Invalid Login: Please hit the back button and try again'); //if password isn't equal to password existing in jsonn data, show error message
-       
-      }
-    //if(typeof users_reg_data['ebmember'].password ==request.body.password2) {
-      // response.redirect('/master_mainpg.html?');
-      //}
-       //else {
-         // response.send('Invalid Login: Please hit the back button and try again'); //if password isn't equal to password existing in jsonn data, show error message
-       
-   //   }
-      
-  }
-
-});
-
-
-console.log(users_reg_data['ebmember'] );
 
 app.all('*', function (request, response, next) {
    console.log(request.method + ' to ' + request.path); //respond to HTTP request by sending type of request and the path of request

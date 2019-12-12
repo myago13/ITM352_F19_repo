@@ -1,4 +1,9 @@
 {
+    "ebmember": {
+        "password": "golden",
+        "email": "gk@hawaii.edu",
+        "fullname": "Executive Board Member"
+    },
     "dport": {
         "name": "Dan Port",
         "password": "portspassword",
