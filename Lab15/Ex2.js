@@ -3,6 +3,7 @@ var app = express();
 var myParser = require("body-parser");
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var qs = require('querystring'); //Needs querystring in order to initiate functions
 
 
 app.use(session({secret: "ITM 352 rocks"}));
