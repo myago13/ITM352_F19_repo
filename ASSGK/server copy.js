@@ -1,6 +1,5 @@
 
 
-
 var express = require('express'); //initializes express to set up web server
 var myParser = require("body-parser"); //initializes body-parser to set up web server
 var filename = 'user_data.json' //Defines the user_data.json array as an object

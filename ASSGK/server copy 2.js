@@ -14,7 +14,6 @@ if (fs.existsSync(filename)) {
 
 
     data = fs.readFileSync(filename, 'utf-8'); //Reads the file and returns back with data and then continues with code as requested.
-   
     users_reg_data = JSON.parse(data); //Parses data in order to turn string into an object
 }
 
@@ -79,19 +78,6 @@ console.log("3");
         }
     }
 );
-
-//DISPLAY GK MEMBER LIST
-app.post("/Total_ptpg.html", function (request, response) {
-    the_username = request.body.username; //makes username 
-  response.send(users_reg_data);
-
-//   response.send(users_reg_data.username[i]); Attempt to get only usernames to show up but i is not defined
-// response.send (users_reg_data[the_username].email}; attempt to get emails but nothing shows up
-// How to format using server????
-});
-
-
-
 
 
 app.all('*', function (request, response, next) {
