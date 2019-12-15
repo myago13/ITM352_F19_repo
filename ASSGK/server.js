@@ -87,6 +87,8 @@ app.post("/Total_ptpg.html", function (request, response) {
 
 //   response.send(users_reg_data.username[i]); Attempt to get only usernames to show up but i is not defined
 // response.send (users_reg_data[the_username].email}; attempt to get emails but nothing shows up
+//response.send(users_reg_data.password); Doesn't work
+//response.send(users_reg_data['itm352'].password); We only can retrieve the password from a specific user rather than all users
 // How to format using server????
 });
 
