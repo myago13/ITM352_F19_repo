@@ -8,7 +8,7 @@
            f.email.value=urlParams.get("email"); //email from form is equal to the email that is displayed in URL
            f.password.value=urlParams.get("password"); //password from form is equal to the password that is in URL
            f.repeat_password.value=urlParams.get("repeat_password"); //repeat password from form is equal to the repeat password that is in URL
-           f.points.value=urlParams.get("starting_points")//beginning password from form is equal to the starting points displayed in URL
+           f.points.value=urlParams.get("points")//beginning password from form is equal to the starting points displayed in URL
         
         if (urlParams.has("username_error")){ //if there are username errors, get username errors and display in URL
         username_label.innerHTML=urlParams.get("username_error");
@@ -62,7 +62,7 @@
         <input type="email" name="email" size="40" placeholder="Enter Email" ><label for="email" id="email_label"></label><br />
         <input type="password" id="password" name="password"  size="40" pattern=".{6,}"  required title="6 characters minimum" placeholder="Enter Password" ><br />
         <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{6,}" required title="6 characters minimum" placeholder="Enter Password Again"><br />
-        <input type="points" name="starting_points" size="40" required title="Start with 0" placeholder="Enter points for a new member" ><label for="points" id="points_label"></label><br />
+        <input type="number" name="points" size="40" required title="Start with 0" placeholder="Enter points for a new member" ><label for="points" id="points_label"></label><br />
        
         <input type="submit" value="Submit" id="submit" value="checkpassword" onclick="checkpassword()">
         </form></div>
