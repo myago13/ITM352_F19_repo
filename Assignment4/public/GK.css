@@ -1,55 +1,54 @@
-/* Description: A CSS page that styles the html pages. */
-/*Jayla Kaita & Melissa Yago 12/1/19*/
-/*products page*/
+/* Description: A CSS page that styles the html login pages 
+and the general member's point page. */
+
+/*Jayla Kaita & Melissa Yago & Preetha Pant 12/19/19*/
+
+/*Changes color of primary heading
+and aligns it to center
+text shadow used to emphasize the heading*/
 h1 {
-    color: rgb(0, 64, 255);
+  color: rgb(0, 41, 163);
+  text-align: center;
+  font-style: inherit;
+  font-display: inherit;
+  text-shadow: -1px 0  white, 0 1px  white, 1px 0  white, 0 -1px  white;
+}
+/*Changes color of secondary heading
+and aligns it to center
+text shadow used to emphasize the heading*/
+h2 {
+    color:  rgb(0, 41, 163);
     text-align: center;
-    font-style: inherit;
-    font-display: inherit;
     text-shadow: -1px 0  white, 0 1px  white, 1px 0  white, 0 -1px  white;
-  }
-  
-  h2 {
-      color:  gold;
-      text-align: center;
-      text-shadow: -1px 0  white, 0 1px  white, 1px 0  white, 0 -1px  white;
-  }
-  /*page background*/
-  body {
-      
-      background: white; 
-      background-repeat: no-repeat; 
-      background-size: cover; 
-  }
-  /*pictures of flowers*/
-  img
-  {
-    width: 200px;
-    height: 200px;
-    border: 3px solid rgb(0, 64, 255);
-  }
-  
-  div {
-    align-content: center;
-    text-align: center;
-    color: palevioletred;
-  }
-  /*purchase submit button*/
-  input {
-  color: gold;
-  }
-  /*invoice*/
-  table{
-    color: rgb(96, 0, 134);
-    text-align: center;
-    border-color: lavender;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  /*invoice table*/
-  th, td {
-    padding: 5px;
-    text-align: center;
-    color: white;
-    background:  rgb(212, 212, 248);
-  }
+}
+/*page background*/
+body {
+    
+    background: gold; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+}
+/*pictures of events*/
+img
+{
+  width: 300px;
+  height: 300px;
+  border: 3px solid rgb(0, 41, 163);
+}
+
+/*changes the color of the text that is inputted into the textbox
+and aligns it to the center of the page*/
+div {
+  align-content: center;
+  text-align: center;
+  color: rgb(0, 41, 163);
+}
+
+/*changes the color of the submit button
+and aligns it to the center of the page*/
+input {
+  padding: 10px;
+  display: block;
+  margin: 0 auto 0 auto;
+  color: rgb(0, 41, 163);
+}

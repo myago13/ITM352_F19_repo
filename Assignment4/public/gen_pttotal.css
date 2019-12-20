@@ -1,35 +1,53 @@
-/*invoice*/
+/* Description: A CSS page that styles the table where it displays the total points*/
+
+/*Jayla Kaita & Melissa Yago & Preetha Pant 12/19/19*/
+
+/*changes the color for the primary header
+and aligns it to the center of the page*/
 h1 {
-  color: rgb(0, 55, 219);
+  color: rgb(0, 41, 163);
   text-align: center;
   font-style: inherit;
   font-display: inherit;
-  text-shadow: -1px 0  white, 0 1px  white, 1px 0  white, 0 -1px  white;
 }
 
+/*changes the color of the secondary header 
+and aligns it to the center
+gives it a glowy effect*/
 h2 {
     color:  gold;
     text-align: center;
-    text-shadow: -1px 0  white, 0 1px  white, 1px 0  white, 0 -1px  white;
+    text-shadow: 1px 1px 2px rgb(255, 175, 3), 0 0 25px rgb(255, 238, 0), 0 0 5px rgb(255, 208, 0);
 }
 
+/*alignes the table to the center*/
 table{
-    color: rgb(96, 0, 134);
     text-align: center;
-    border-color: lavender;
+    border-color: rgb(93, 107, 151);
     margin-left: auto;
     margin-right: auto;
   }
-  /*invoice table*/
+  /*changes the color that is within the table
+  changes the text color and alignment*/
   th, td {
     padding: 5px;
     text-align: center;
     color: white;
-    background:  rgb(212, 212, 248);
+    background:  rgb(0, 41, 163);
   }
+  /*aligns the image to the center and 
+  sets the height and width*/
   img{
       height: 590px;
       width: 700px;
       display: block;
       margin: 0 auto 0 auto;
   }
+
+  /*makes the logout button blue*/
+input{
+  color: rgb(0, 41, 163);
+  padding: 10px;
+  display: block;
+  margin: 0 auto 0 auto;
+}

@@ -1,3 +1,9 @@
+/*Description: json array that contains all four events with their respective points, 
+description and image. 
+The variable called events defines the array that is used in the Points Calculated 
+and Total Points html page.
+Code is borrowed from previous Assignment 1
+Jayla Kaita & Melissa Yago & Preetha Pant 12/19/19 */
 var events = [
     { 
      "Event" : "Community Service",

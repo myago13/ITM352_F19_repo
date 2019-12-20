@@ -32,7 +32,7 @@ if (fs.existsSync(filename)) {
 app.post("/login.html", function (request, response) {
     the_username = request.body.username; //makes username 
     //Validation of Login Data
-    if (typeof users_reg_data[the_username] != 'undefined') {   //To check if the username exists in the json data
+    if (typeof users_reg_data[the_username] != '') {   //To check if the username exists in the json data
         if (users_reg_data[the_username].password == request.body.password) { //If the password inputted is = to the password in the json array
 
             response.redirect('/gen_ptpg.html?' + `&username=${the_username}`); //Send user to general member page to calculate points along with their username
@@ -129,7 +129,7 @@ app.post("/master_mainpg.html", function (request, response) {
                 var now = new Date(); //defines the date the user last logged in
                 var back = `Click the back button to go to main page`; //Message Display if the user wants to go back to the main page
             } else {
-                var msg = '';
+            
                 var now = 'first visit'; //Defines if it is the first visit of ebmember
             }
             request.session.last_login = now; //requests session
