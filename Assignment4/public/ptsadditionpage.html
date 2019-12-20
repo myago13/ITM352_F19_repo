@@ -1,0 +1,37 @@
+<link href="eb_mpg.css" rel="stylesheet">
+<h1>Type the username to add points for that member!</h1>
+<script>
+ window.onload=function (){ //Got help from Mr. Port for this section
+    var urlParams = new URLSearchParams(window.location.search);
+   if (urlParams.has("username")){ //Gets username data and displays in URL
+     add_points.points.value=urlParams.get("points"); //points from form is equal to points that is displayed in URL
+     add_points.username.value=urlParams.get("username"); // username from form is equal to the username that is displayed in URL
+   }}
+</script>
+
+<form name="add_points" method="POST"> 
+        <div>
+            <input type="text" name="username" size="40" placeholder="Enter Username"></br>
+            <input type="number" name="points" size="40" placeholder="Enter Points"></br>
+            <input type="submit" value="submit" id="submit">
+        </div>
+    </form>
+
+
+    <script>
+        /*this is the code for the navigation bar
+        this page includes is active because it is currently being viewed
+        all the other page links are not*/
+    </script>
+    <ul class="topnav">
+        <li><a href="./master_mainpg.html">Home</a></li>
+        <li><a href="./Total_ptpg.html">List of GK Members</a></li>
+        <li><a href="./registration.html">Register New Member</a></li>
+        <li><a class="active" href="./ptsadditionpage.html">Add Points to a Member</a></li>
+    </ul>
+    <script>
+            /*this is the form where the username of a selected Golden Key member is inputted
+            and the number of points the Webmaster will give them
+            
+            when the submit button is clicked the points will be updated into the JSON file of the selected user*/
+    </script>

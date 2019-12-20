@@ -1,0 +1,121 @@
+<script>
+        /*Description: Points Calculation page for the Golden Key General Members
+        only members that login through the general login page have access to the points calculated page
+        
+        Code is adapted from previous Assignment 2
+        
+        Jayla Kaita & Melissa Yago & Preetha Pant 12/19/19 */
+</script>
+<script src="./events_pts.js">//within the head i linked the css to the the display page</script>
+    
+    <!DOCTYPE html>
+    <html>
+    
+    <head>
+        <meta charset="utf-8">
+        <title>Point Calculation Page</title>
+    
+        <link href="GK.css" rel="stylesheet">
+        <script>//this is the link to the CSS page that creates the aesthetic of this page</script>
+    </head>
+    
+    <body>
+    
+        <form name="product_selection_form" action="process_page" method="GET">
+            <header>
+                <h1>Golden Key International Honours Society</h1>
+            </header>
+            <div>
+                <main id="products_main_display">
+                   <script>
+                        for (i = 0; i < events.length; i++) { 
+                            /*for loop of the Events array which retrieves the properties of all four events 
+                            event, points, and images to be displayed on the Calculate Points Page
+                            
+                            this code was adapted from previouse assignment 2*/
+                            document.write(`
+                            <h2>${events[i].Event}</h2>
+                            <h2>${events[i].Points} Points</h2> 
+                            <img src="${events[i].image}">                
+                            <div>
+                            <label id="quantity${i}_label"}">Times attended:</label>
+                                    <input type="text" placeholder="enter amount here!" name="quantity${i}" 
+                                    onkeyup="checkQuantityTextbox(this);">         
+                            </div>
+                                    `)
+                        }
+                    </script>
+                    <br>
+                    <script>/*when the submit button is clicked it will take the user to the 
+                    total points page where they are able to view what they calculated*/</script>
+                    <strong><input type="submit" value="Calculate!" name="purchase_submit"></strong>
+                </main>
+            </div>
+            <footer id="display_footer">
+                <h1>
+                    Aim For Active Status!
+                </h1>
+            </footer>
+        </form>
+    
+    </body>
+    
+    </html>
+    
+    <script>
+    //the form goes to the server and loads the Point Calculation page
+    
+    //once the general user presses the submit button on the index page it will bring them to this page (the point calculation)
+    //within the body is everything the client sees (h1, events, name, points, image)
+    //in the script a for loop is written so that the arrays are listed instead of manually writing each item 
+    //the for loop is listing all the objects until is reaches the last one (3) and stops
+    
+    //when the submit button is pressed the functions will process
+    
+    //borrowed code from Assignment 1 example
+    //functions to do checking
+             function isNonNegInt(q, return_errors = false) {
+                 errors = []; // assume no errors at first
+                 if (q == '') q = 0; // handle blank inputs as if they are 0
+                 if (Number(q) != q) errors.push('<font color="red">Please put a number</font>'); // Check if string is a number value
+                 else if (q < 0) errors.push('<font color="red">Negative value!</font>'); // Check if it is non-negative
+                 else if (parseInt(q) != q) errors.push('<font color="red">Not an integer!</font>'); // Check that it is an integer
+                 return return_errors ? errors : (errors.length == 0);
+             }
+             function checkQuantityTextbox(theTextbox) {
+                 errs = isNonNegInt(theTextbox.value, true);
+                 if (errs.length == 0) errs = ['Quantity:'];
+                 if (theTextbox.value.trim() == '') errs = ['Quantity:'];
+                 document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", ");
+             }
+             //get parameters from query string
+             window.onload = function () {
+                 let params = (new URL(document.location)).searchParams; // get the query string which has the form data
+                 // form was submitted so check that quantities are valid then redirect to invoice if ok.
+                  if (params.has('purchase_submit')) {
+                     has_errors = false; // assume quantities are valid from the start
+                     total_qty = 0; // need to check if something was selected so we will look if the total > 0
+                     for (i = 0; i < events.length; i++) {
+                         if (params.has(`quantity${i}`)) {
+                             a_qty = params.get(`quantity${i}`);
+                             // make textboxes sticky in case of invalid data
+                             product_selection_form[`quantity${i}`].value = a_qty;
+                             total_qty += a_qty;
+                             if (!isNonNegInt(a_qty)) {
+                                 has_errors = true; // oops, invalid quantity
+                                 checkQuantityTextbox(product_selection_form[`quantity${i}`]); // show where the error is
+                             }
+                         }
+                     }
+                     // Now respond to errors or redirect to invoice if all is ok
+                     if (has_errors) {
+                         alert("Please enter only valid numbers!"); //Displays please enter only valid numbers pop up message if there are errors
+                     } else if (total_qty == 0) { // no quantity selections, just give a general alert of "please enter the amt of times you attended an event"
+                         alert("Please enter the amount of times you attended an event!");
+                     } else { // when it is all good to go, the server will send client to Point Total page.
+                        response.redirect('/gen_pttotal') 
+                     }
+                 }
+             } 
+         
+         </script>
