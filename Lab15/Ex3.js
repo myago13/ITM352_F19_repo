@@ -71,7 +71,9 @@ app.get("/login", function (request, response) {
                 var now = 'first visit';
             }
             request.session.last_login = now;
+            console.log("hey there");
             response.send(`${msg} <BR>${the_username} logged in at ${now}`);
+            console.log("hey there");
         } else {
             response.redirect('/login');
         }

@@ -5,13 +5,10 @@ var myParser = require("body-parser"); //initializes body-parser to set up web s
 var filename = 'user_data.json' //Defines the user_data.json array as an object
 var app = express(); //Executes Express
 var qs = require('querystring'); //cannot change anything within the querstring
-var cookieParser = require('cookie-parser'); //Added
-var session = require("express-session"); //Added
-app.use(session({secret: "ITM352 rocks!"})); //Added
+
 
 fs = require('fs'); //Use the file system module 
 app.use(myParser.urlencoded({ extended: true }));
-app.use(cookieParser()); //Added
 //returns a boolean (true or false) (Opens file only if it exists)
 if (fs.existsSync(filename)) {
     stats = fs.statSync(filename) //gets the stats of your file
@@ -60,32 +57,10 @@ app.post("/webmasterLogin.html", function (request, response) {
     if (typeof users_reg_data[the_username] != 'undefined') {   //To check if the username exists in the json data
         the_usertype = users_reg_data[the_username].usertype;
         if (the_usertype == 'Webmaster') {   //To check if the username exists in the json data 
-
-   
-            response.redirect("/master_mainpg.html?");//expires in a minute
- 
-        
+       
+        response.redirect('/master_mainpg.html?' + `&username=${the_username}`); 
         }
     }
-});
-
-
-app.post("/master_mainpg.html", function (request, response) {
-    
-        if (typeof request.session.last_login != 'undefined')
-            {
-                var msg = `You last logged in at ${request.session.last_login}`;
-                var now = new Date();
-                var back = `Click the back button to go to main page`;
-            } else {
-                var msg = '';
-                var now = 'first visit';
-            }
-            request.session.last_login = now;
-            response.send(`${msg} <BR>${the_username} logged in at ${now}<BR>${back} `);
-            response.send("Click the back button to go back to main page.")
-           
-
 });
 
 app.post("/ptsadditionpage.html", function (request, response) {
@@ -189,7 +164,7 @@ app.post("/Total_ptpg.html", function (request, response) {
 
 
 app.all('*', function (request, response, next) {
-    console.log(request.method + ' to ' + request.path, request.session.id); //respond to HTTP request by sending type of request and the path of request
+    console.log(request.method + ' to ' + request.path); //respond to HTTP request by sending type of request and the path of request
     next(); //calls the middleware function
 });
 app.use(express.static('./public')); //sets up a request to respond to GET and looks for the file from public (sets up static web server)

@@ -4,7 +4,7 @@ const querystring = require('querystring'); //Cannot change anything within the 
 
 var express = require('express'); //initializes express to set up web server
 var myParser = require("body-parser"); //initializes body-parser to set up web server
-var products = require("./public/product.js.js"); //uses flower products listed in the product.js file
+var products = require("./public/product.js"); //uses flower products listed in the product.js file
 var filename = 'user_data.json' //Defines the user_data.json array as an object
 var app = express(); //Executes Express
 var qs = require('querystring'); //Needs querystring in order to initiate functions
@@ -73,45 +73,12 @@ users_reg_data = JSON.parse(data); //Parses data in order to turn string into an
 
 
 //GETS TO LOGIN PAGE
-app.get("/login.html", function (request, response) {
-   // Give a simple login form (responds by going to the login page) and requests information inputted by this form 
-   str = `
-   <html lang="en">
-   <link href="pretty.css" rel="stylesheet">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Document</title>
-</head>
-<h1>Sunrise Flower Shop Login</h1>
-<h2>To continue purchasing, please login below!</h2>
-<body>
-<form action="" method="POST"> 
-   <div>
-   <input type="text" name="username" size="40" placeholder="enter username" ><br /> 
-   <input type="password" name="password" size="40" placeholder="enter password"><br />
-   <input type="submit" value="Submit" id="submit">  </div>
-   </form>  
-</body>
-<h2>Are you a new user? Click below to register on our site!</h2>
-<body>
-<div>
-<form action="./registration.html">
-<input type="submit" value="Register Here" id="register_here" name="register_here">
-</form>
-</div>
-</body>
-</html>
-   `;
-   response.send(str);
-});
 
 
   // Process login form POST and redirect to invoice page if ok and back to login page if not
 app.post("/login.html", function (request, response) {
     console.log(flowerquant);
-    the_username= request.body.username.toLowerCase(); //makes username case insensitive
+    the_username= request.body.username; //makes username case insensitive
     //Validate login data
     if(typeof users_reg_data[the_username] != 'undefined'){   //To check if the username exists in the json data
       if( users_reg_data[the_username].password ==request.body.password){

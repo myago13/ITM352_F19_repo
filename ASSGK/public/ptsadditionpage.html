@@ -1,3 +1,12 @@
+<script>
+ window.onload=function (){ //Got help from Mr. Port for this section
+    var urlParams = new URLSearchParams(window.location.search);
+   if (urlParams.has("username")){ //Gets username data and displays in URL
+     add_points.points.value=urlParams.get("points"); //points from form is equal to points that is displayed in URL
+     add_points.username.value=urlParams.get("username"); // username from form is equal to the username that is displayed in URL
+   }}
+</script>
+
 <form name="add_points" method="POST"> 
         <div>
             <input type="text" name="username" size="40" placeholder="Enter Username"></br>

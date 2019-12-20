@@ -1,0 +1,57 @@
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: gold;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: rgb(0, 64, 255);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: rgb(255, 196, 0);
+  }
+  
+  .active {
+    background-color: white;
+  }
+  
+  h1{
+    color: rgb(0, 64, 255);
+    margin-top: 100px;
+  }
+  
+  form{
+    margin-top: 100px;
+  }
+  
+  input{
+    padding: 10px;
+    
+  }
+  
+  table{
+    margin-top: 100px;
+  }
+  
+  tbody{
+    margin-top: 100px;
+  }
+  
+  body{
+    margin-top: 100px;
+  }
